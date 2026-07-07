@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12 text-center mb-4">
+                <h1>Fraud Detection System</h1>
+                <p class="lead">Enter transaction details to check for potential fraud</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Transaction Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/predict" method="post">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="trans_date_trans_time" class="form-label">Transaction Date/Time</label>
+                                    <input type="datetime-local" class="form-control" id="trans_date_trans_time" name="trans_date_trans_time" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cc_num" class="form-label">Credit Card Number</label>
+                                    <input type="text" class="form-control" id="cc_num" name="cc_num" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="merchant" class="form-label">Merchant</label>
+                                    <input type="text" class="form-control" id="merchant" name="merchant" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="category" class="form-label">Category</label>
+                                    <select class="form-select" id="category" name="category" required>
+                                        <option value="">Select Category</option>
+                                        <option value="grocery_pos">Grocery</option>
+                                        <option value="shopping_pos">Shopping</option>
+                                        <option value="food_dining">Food & Dining</option>
+                                        <option value="entertainment">Entertainment</option>
+                                        <option value="gas_transport">Gas & Transport</option>
+                                        <option value="health_fitness">Health & Fitness</option>
+                                        <option value="travel">Travel</option>
+                                        <option value="home">Home</option>
+                                        <option value="kids_pets">Kids & Pets</option>
+                                        <option value="personal_care">Personal Care</option>
+                                        <option value="misc_pos">Miscellaneous</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="amt" class="form-label">Amount</label>
+                                    <input type="number" step="0.01" class="form-control" id="amt" name="amt" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="first" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="first" name="first" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="last" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="last" name="last" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select class="form-select" id="gender" name="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="dob" class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-control" id="dob" name="dob" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="job" class="form-label">Job</label>
+                                    <input type="text" class="form-control" id="job" name="job" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="street" class="form-label">Street Address</label>
+                                    <input type="text" class="form-control" id="street" name="street" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city" name="city" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state" class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state" name="state" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="zip" class="form-label">ZIP Code</label>
+                                    <input type="text" class="form-control" id="zip" name="zip" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="lat" class="form-label">Latitude</label>
+                                    <input type="number" step="0.000001" class="form-control" id="lat" name="lat" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="long" class="form-label">Longitude</label>
+                                    <input type="number" step="0.000001" class="form-control" id="long" name="long" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="city_pop" class="form-label">City Population</label>
+                                    <input type="number" class="form-control" id="city_pop" name="city_pop" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="merch_lat" class="form-label">Merchant Latitude</label>
+                                    <input type="number" step="0.000001" class="form-control" id="merch_lat" name="merch_lat" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="merch_long" class="form-label">Merchant Longitude</label>
+                                    <input type="number" step="0.000001" class="form-control" id="merch_long" name="merch_long" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="trans_num" class="form-label">Transaction Number</label>
+                                    <input type="text" class="form-control" id="trans_num" name="trans_num" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="unix_time" class="form-label">Unix Time</label>
+                                    <input type="number" class="form-control" id="unix_time" name="unix_time" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">Check for Fraud</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-12 text-center">
+                <a href="/model-info" class="btn btn-secondary">View Model Information</a>
+                <button id="check-api" class="btn btn-info">Check API Status</button>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div id="api-status" class="alert alert-info d-none"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Set current date and time as default
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const formattedDate = now.toISOString().slice(0, 16);
+            document.getElementById('trans_date_trans_time').value = formattedDate;
+            document.getElementById('unix_time').value = Math.floor(now.getTime() / 1000);
+            
+            // Check API status button
+            document.getElementById('check-api').addEventListener('click', function() {
+                fetch('/api-status')
+                    .then(response => response.json())
+                    .then(data => {
+                        const statusDiv = document.getElementById('api-status');
+                        statusDiv.classList.remove('d-none', 'alert-danger', 'alert-success', 'alert-info');
+                        
+                        if (data.status === 'healthy') {
+                            statusDiv.classList.add('alert-success');
+                            statusDiv.textContent = 'API Status: Healthy' + (data.model_loaded ? ' (Model Loaded)' : ' (Model Not Loaded)');
+                        } else {
+                            statusDiv.classList.add('alert-danger');
+                            statusDiv.textContent = 'API Status: ' + data.status + ' - ' + data.message;
+                        }
+                    })
+                    .catch(error => {
+                        const statusDiv = document.getElementById('api-status');
+                        statusDiv.classList.remove('d-none', 'alert-info');
+                        statusDiv.classList.add('alert-danger');
+                        statusDiv.textContent = 'Error connecting to API: ' + error.message;
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

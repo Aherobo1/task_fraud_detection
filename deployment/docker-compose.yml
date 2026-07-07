@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  fraud-detection:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"  # API port
+      - "8501:8501"  # Web UI port
+    volumes:
+      - ../models:/app/models
+      - ../data:/app/data
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
