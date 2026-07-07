@@ -75,5 +75,4 @@ Thumbs.db
 
 src/__pycache__
 src/api/__pycache__
-src/web/__pycache__data/raw/*.csv
-data/raw/*.csv
+src/web/__pycache__

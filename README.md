@@ -8,7 +8,7 @@ The system uses a Random Forest classifier as the core model, achieving high pre
 
 ## Dataset Description
 
-The dataset consists of various features related to transactions, including details about the merchant, transaction amount, user details, and location. The repository now tracks the `data/` folder structure, while the large raw CSV files in `data/raw/` are kept out of git and should be downloaded separately. The key features are:
+The dataset consists of various features related to transactions, including details about the merchant, transaction amount, user details, and location. The repository now tracks the `data/` folder structure, and the raw CSV files in `data/raw/` are versioned with Git LFS. The key features are:
 
 * **trans_date_trans_time** : Timestamp of the transaction.
 * **cc_num** : Credit card number (anonymized transaction number).
